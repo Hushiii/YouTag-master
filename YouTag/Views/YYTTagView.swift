@@ -2,8 +2,8 @@
 //  YYTTagView.swift
 //  YouTag
 //
-//  Created by Smartphone Group9 on 2025.
-//  
+//  Created by Youstanzr on 3/12/20.
+//  Copyright © 2020 Youstanzr. All rights reserved.
 //
 
 import UIKit
@@ -213,9 +213,11 @@ class YYTTagView: UICollectionView, UICollectionViewDataSource, UICollectionView
 				return
 			}
 			tagsList.add(textField.text!.capitalized)
+            // 这一行来通知代理
+            yytdelegate?.tagsListChanged(newTagsList: self.tagsList)
 			self.reloadData()
 		}
-		(textField.superview?.superview as! YYTTagCell).switchMode(enableEditing: false)
+		(textField.superview?.superview as! YYTTagCell).switchMode(enableEditing: true)
 		self.performBatchUpdates(nil, completion: nil)
 	}
 	

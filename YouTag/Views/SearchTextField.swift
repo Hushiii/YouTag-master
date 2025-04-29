@@ -2,8 +2,8 @@
 //  SearchTextField.swift
 //  SearchTextField
 //
-//  Created by Smartphone Group9 on 2025.
-//  
+//  Created by Alejandro Pasccon on 4/20/16.
+//  Copyright © 2016 Alejandro Pasccon. All rights reserved.
 //
 
 import UIKit

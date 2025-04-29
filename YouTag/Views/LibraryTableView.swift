@@ -2,8 +2,8 @@
 //  LibraryTableView.swift
 //  YouTag
 //
-//  Created by Smartphone Group9 on 2025.
-//  
+//  Created by Youstanzr on 2/27/20.
+//  Copyright © 2020 Youstanzr. All rights reserved.
 //
 
 import UIKit

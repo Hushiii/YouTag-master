@@ -5,7 +5,7 @@
 	<key>NSMicrophoneUsageDescription</key>
 	<string>音频播放</string>
 	<key>BackendAPIBaseURL</key>
-	<string>http://10.17.113.131:5050</string>
+	<string>http://127.0.0.1:5050</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

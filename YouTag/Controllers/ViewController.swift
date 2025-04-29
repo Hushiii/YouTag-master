@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  YouTag
 //
-//  Created by Smartphone Group9 on 2025.
-//  
+//  Created by Youstanzr on 8/12/19.
+//  Copyright © 2019 Youstanzr. All rights reserved.
 //
 
 import UIKit
@@ -31,7 +31,7 @@ class ViewController: UIViewController, FilterPickerViewDelegate, YYTTagViewDele
     }()
     let titleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.text = "YouTag"
+        lbl.text = "YouTunes"
         lbl.font = UIFont.init(name: "DINCondensed-Bold", size: 28)
         lbl.textAlignment = .left
         return lbl
@@ -45,7 +45,7 @@ class ViewController: UIViewController, FilterPickerViewDelegate, YYTTagViewDele
         return lbl
     }()
     let logoImageView: UIImageView = {
-        let imgView = UIImageView(image: UIImage(named: "logo"))
+        let imgView = UIImageView(image: UIImage(named: "logo3"))
         imgView.contentMode = .scaleAspectFit
         return imgView
     }()
@@ -55,6 +55,7 @@ class ViewController: UIViewController, FilterPickerViewDelegate, YYTTagViewDele
         return view
     }()
     
+    var tagView: YYTTagView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +79,7 @@ class ViewController: UIViewController, FilterPickerViewDelegate, YYTTagViewDele
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.trailingAnchor.constraint(equalTo: logoView.trailingAnchor).isActive = true
         titleLabel.centerYAnchor.constraint(equalTo: logoView.centerYAnchor, constant: 3).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: logoView.widthAnchor, multiplier: 0.58).isActive = true
+        titleLabel.widthAnchor.constraint(equalTo: logoView.widthAnchor, multiplier: 0.8).isActive = true
         titleLabel.heightAnchor.constraint(equalTo: logoView.heightAnchor).isActive = true
         
         menuButton.addTarget(self, action: #selector(menuButtonAction), for: .touchUpInside)
@@ -86,7 +87,7 @@ class ViewController: UIViewController, FilterPickerViewDelegate, YYTTagViewDele
         menuButton.translatesAutoresizingMaskIntoConstraints = false
         menuButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
         menuButton.topAnchor.constraint(equalTo: self.logoView.topAnchor).isActive = true
-        menuButton.widthAnchor.constraint(equalTo: self.logoView.heightAnchor, multiplier: 0.8).isActive = true
+        menuButton.widthAnchor.constraint(equalTo: self.logoView.heightAnchor, multiplier: 0.58).isActive = true
         menuButton.heightAnchor.constraint(equalTo: self.logoView.heightAnchor).isActive = true
         
         settingButton.addTarget(self, action: #selector(settingButtonAction), for: .touchUpInside)
@@ -106,13 +107,26 @@ class ViewController: UIViewController, FilterPickerViewDelegate, YYTTagViewDele
         filterButton.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2).isActive = true
         
         tagsView = YYTFilterTagView(frame: .zero, tagsList: NSMutableArray(), isDeleteEnabled: true)
-        tagsView.yytdelegate = self
         self.view.addSubview(tagsView)
         tagsView.translatesAutoresizingMaskIntoConstraints = false
         tagsView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 10).isActive = true
         tagsView.trailingAnchor.constraint(equalTo: self.filterButton.leadingAnchor, constant: -10).isActive = true
         tagsView.topAnchor.constraint(equalTo: filterButton.topAnchor).isActive = true
         tagsView.heightAnchor.constraint(equalTo: filterButton.heightAnchor).isActive = true
+        // 初始化标签视图
+        let tags = NSMutableArray(array: ["标签1", "标签2", "标签3"])
+        tagView = YYTTagView(
+            frame: CGRect(x: 20, y: 100, width: view.frame.width - 40, height: 100),
+            tagsList: tags,
+            isAddEnabled: true,
+            isMultiSelection: true,
+            isDeleteEnabled: true,
+            suggestionDataSource: ["建议1", "建议2", "建议3"]
+        )
+        tagView.yytdelegate = self
+        tagView.addTagPlaceHolder = "添加标签..."
+        tagsView.yytdelegate = self
+
         
         self.view.addSubview(versionLabel)
         versionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -149,6 +163,11 @@ class ViewController: UIViewController, FilterPickerViewDelegate, YYTTagViewDele
         filterPickerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
     
+//    // 实现代理方法
+//    func tagsListChanged(newTagsList: NSMutableArray) {
+//        print("标签列表已更新: \(newTagsList)")
+//    }
+
     override func viewWillAppear(_ animated: Bool) {
         playlistManager.computePlaylist()
         playlistManager.playlistLibraryView.scrollToTop()

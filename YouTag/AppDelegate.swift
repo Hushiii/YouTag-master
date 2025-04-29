@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  YouTag
 //
-//  Created by Smartphone Group9 on 2025.
-//  
+//  Created by Youstanzr on 8/12/19.
+//  Copyright © 2019 Youstanzr. All rights reserved.
 //
 
 import UIKit
